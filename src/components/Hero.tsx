@@ -15,21 +15,26 @@ type VideoIndex = 1 | 2 | 3 | 4;
 gsap.registerPlugin(ScrollTrigger);
 
 const Hero = () => {
-  // State Management
-  const [currentIndex, setCurrentIndex] = useState<VideoIndex>(1);    // Track current video
-  const [hasClicked, setHasClicked] = useState<boolean>(false);       // Track click state
-  const [loading, setLoading] = useState<boolean>(true);              // Loading state
-  const [loadedVideos, setLoadedVideos] = useState<number>(0);        // Count loaded videos
+  // --- STATE MANAGEMENT ---
+  // Current video being played (1-4)
+  const [currentIndex, setCurrentIndex] = useState<VideoIndex>(1);
+  // Track if preview video was clicked
+  const [hasClicked, setHasClicked] = useState<boolean>(false);
+  // Show loading screen until videos are ready
+  const [loading, setLoading] = useState<boolean>(true);
+  // Count how many videos have loaded
+  const [loadedVideos, setLoadedVideos] = useState<number>(0);
 
   const totalVideos: number = 4;
   const nextVdRef = useRef<HTMLVideoElement | null>(null);           // Reference to video element
 
-  // Handle video load events
+  // --- VIDEO HANDLING ---
+  // Count loaded videos and hide loader when done
   const handleVideoLoad = (): void => {
     setLoadedVideos((prev: number) => prev + 1);
   };
 
-  // Hide loader when videos are ready
+  // Hide loader when all videos are ready
   useEffect(() => {
     if (loadedVideos === totalVideos - 1) {
       setLoading(false);
@@ -42,7 +47,8 @@ const Hero = () => {
     setCurrentIndex((prevIndex) => ((prevIndex % totalVideos) + 1) as VideoIndex);
   };
 
-  // Video transition animation
+  // --- ANIMATIONS ---
+  // Video transition animation when clicked
   useGSAP(
     () => {
       if (hasClicked && nextVdRef.current) {
@@ -103,12 +109,14 @@ const Hero = () => {
     });
   });
 
-  // Helper function to get video source
+  // --- HELPER FUNCTIONS ---
+  // Get video file path based on index
   const getVideoSrc = (index: number): string => `videos/hero-${index}.mp4`;
 
   return (
+    // --- LAYOUT STRUCTURE ---
     <div className="relative h-dvh w-screen overflow-x-hidden">
-      {/* Loading Overlay */}
+      {/* Loading spinner - shows until videos are ready */}
       {loading && (
         <div className="flex-center absolute z-[100] h-dvh w-screen overflow-hidden bg-violet-50">
           <div className="three-body">
@@ -119,14 +127,14 @@ const Hero = () => {
         </div>
       )}
 
-      {/* Main Video Container */}
+      {/* Main video container with shape-shifting frame */}
       <div
         id="video-frame"
         className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75"
       >
         <div className="relative h-full w-full bg-blue-75"> {/* Background color to prevent white flash */}
           <div>
-            {/* Preview Video (small clickable video) */}
+            {/* Small preview video that user can click */}
             <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
               <VideoPreview>
                 <div
@@ -146,7 +154,7 @@ const Hero = () => {
               </VideoPreview>
             </div>
 
-            {/* Main Video (becomes full screen) */}
+            {/* Full screen video that appears after click */}
             <video
               ref={nextVdRef}
               src={getVideoSrc(currentIndex)}
@@ -156,7 +164,7 @@ const Hero = () => {
               className="absolute-center invisible absolute z-20 size-64 object-cover object-center opacity-0"
               onLoadedData={handleVideoLoad}
             />
-            {/* Background Video (always playing) */}
+            {/* Background video that's always playing */}
             <video
               src={getVideoSrc(
                 currentIndex === totalVideos - 1 ? 1 : currentIndex
@@ -169,7 +177,7 @@ const Hero = () => {
             />
           </div>
 
-          {/* Text Overlays and Button */}
+          {/* Text overlays and button */}
           <h1 className="special-font hero-heading absolute bottom-5 right-5 z-40 text-blue-75">
             G<b>A</b>MING
           </h1>
