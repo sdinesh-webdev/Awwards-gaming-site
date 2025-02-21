@@ -1,11 +1,27 @@
-# React + TypeScript + Vite
+# Awwards Gaming Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern gaming website with smooth video transitions and animations built with:
+- React + TypeScript
+- Tailwind CSS
+- GSAP Animations
+- Vite
 
-Currently, two official plugins are available:
+## Features
+- Smooth video transitions
+- Custom animations
+- Responsive design
+- Modern UI/UX
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
+```bash
+npm install
+npm run dev
+```
+
+## Project Structure
+- `/src` - Source files
+  - `/components` - React components
+  - `/public` - Static assets like videos and fonts
 
 ## Expanding the ESLint configuration
 
