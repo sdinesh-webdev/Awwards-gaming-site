@@ -9,7 +9,8 @@ gsap.registerPlugin(ScrollTrigger);
 // Define TypeScript interface for component props
 interface AnimatedTitleProps {
   title: string;          // The text to be animated
-  containerClass?: string; // Optional CSS classes for container
+  containerClass?: string;
+  className?: string;// Optional CSS classes for container
 }
 
 const AnimatedTitle = ({ title, containerClass }: AnimatedTitleProps) => {
