@@ -11,7 +11,7 @@
     "clean": "rimraf dist || rd /s /q dist || rm -rf dist",
     "prebuild": "npm run clean"
   },
-  "dependencies": {
+    "dependencies": {
     "@gsap/react": "^2.1.2",
     "clsx": "^2.1.1",
     "gsap": "^3.12.7",

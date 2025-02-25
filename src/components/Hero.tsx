@@ -111,7 +111,7 @@ const Hero = () => {
 
   // --- HELPER FUNCTIONS ---
   // Get video file path based on index
-  const getVideoSrc = (index: number): string => `videos/hero-${index}.mp4`;
+  const getVideoSrc = (index: number): string => `videos/hero-${index}.webm`;
 
   return (
     // --- LAYOUT STRUCTURE ---
